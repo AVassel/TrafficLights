@@ -12,7 +12,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet var lights: [UIView]!
     
-    var lightIndex = 0
+    private var lightIndex = 0
+    private let lightIsOn: CGFloat = 1
+    private let lightIsOff: CGFloat = 0.3
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +22,8 @@ class ViewController: UIViewController {
         startButton.setTitle("START", for: .normal)
 
         for light in lights {
-            light.layer.cornerRadius = 35
-            light.alpha = 0.3
+            light.layer.cornerRadius = light.frame.width / 2
+            light.alpha = lightIsOff
         }
     }
 
@@ -30,15 +32,15 @@ class ViewController: UIViewController {
             startButton.setTitle("NEXT", for: .normal)
         }
         
-        if lights[lightIndex].alpha == 1 {
-            lights[lightIndex].alpha = 0.3
+        if lights[lightIndex].alpha == lightIsOn {
+            lights[lightIndex].alpha = lightIsOff
             lightIndex += 1
         }
         
         if lightIndex > 2 {
             lightIndex = 0
         }
-        lights[lightIndex].alpha = 1
+        lights[lightIndex].alpha = lightIsOn
     }
     
 }
